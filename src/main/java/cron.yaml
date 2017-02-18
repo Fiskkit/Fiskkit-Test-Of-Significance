@@ -1,0 +1,7 @@
+version: 1
+cron:
+ - name: "tos"
+   url: "/tos"
+   schedule: "*/5 * * * *"
+
+
