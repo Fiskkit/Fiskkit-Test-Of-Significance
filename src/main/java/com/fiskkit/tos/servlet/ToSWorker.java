@@ -186,7 +186,7 @@ public class ToSWorker extends HttpServlet {
 		//	String db_type = System.getProperty("DB_TYPE");
 			
 			//FIXME move to MYSQLAccess constructor?
-			MYSQLAccess.initializeClassroomConnection();
+			MYSQLAccess.initializeConnection();
 			
 			
 			LOGGER.info("====>Classroom Connection obtained -- Ready to perform test-of-significance run"+System.getProperty("MYSQL_NAME"));
