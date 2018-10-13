@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fiskkit.exception.FiskkitException;
 import com.fiskkit.tos.darkbot.TestOfSignificance;
 import com.fiskkit.tos.darkbot.network.MYSQLAccess;
+import com.fiskkit.util.ArticleSource;
 
 
 
@@ -154,6 +155,8 @@ public class ToSWorker extends HttpServlet {
 		try {
 			
 			//FIXME move to MYSQLAccess constructor?
+			
+			
 			MYSQLAccess.initializeConnection();
 			
 			
@@ -170,6 +173,38 @@ public class ToSWorker extends HttpServlet {
 		
 		LOGGER.info("test no op ... returning");
 
+// Classroom ToS run
+		
+		try {
+			
+			
+			System.setProperty("MYSQL_NAME", "aajnt6fptmxczq.cwblf8lajcuh.us-west-1.rds.amazonaws.com");
+			//String mysql_user = System.getProperty("MYSQL_USER");
+			System.setProperty("MYSQL_PASSWORD_ENC", "wT#w44Vt?3xcB4");
+//			String mysql_port = System.getProperty("MYSQL_PORT");
+	//		String mysql_db = System.getProperty("MYSQL_DB");
+		//	String db_type = System.getProperty("DB_TYPE");
+			
+			//FIXME move to MYSQLAccess constructor?
+			MYSQLAccess.initializeClassroomConnection();
+			
+			
+			LOGGER.info("====>Classroom Connection obtained -- Ready to perform test-of-significance run"+System.getProperty("MYSQL_NAME"));
+			TestOfSignificance.runTestOfSignificance();
+			
+			
+		} catch (Exception e) {
+			throw new FiskkitException("unable to process request", e);
+		} finally {
+			MYSQLAccess.closeConnection();
+			
+		}
+		
+		LOGGER.info("test no op ... returning");
+
+	
+	
+	
 	}
 	
 	
